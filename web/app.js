@@ -44,9 +44,12 @@ function showView(view) {
   if (settingsVisible) requestAnimationFrame(() => $("settings-view").scrollTo({ top: 0, behavior: "smooth" }));
 }
 
-function scrollToBottom() {
+function scrollToBottom(force = false) {
   const scroller = $("chat-scroll");
-  scroller.scrollTop = scroller.scrollHeight;
+  const distanceFromBottom = scroller.scrollHeight - scroller.scrollTop - scroller.clientHeight;
+  if (force || distanceFromBottom < 140) {
+    scroller.scrollTo({ top: scroller.scrollHeight, behavior: "smooth" });
+  }
 }
 
 function addMessage(role, content) {
