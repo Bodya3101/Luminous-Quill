@@ -32,8 +32,15 @@ function toast(message, type = "success") {
 }
 
 function showView(view) {
-  if (view !== "settings" && state.formDirty &&
-      !window.confirm("Есть несохранённые изменения профиля. Перейти без сохранения?")) return;
+  if (view !== "settings" && state.formDirty) {
+    if (!window.confirm("Есть несохранённые изменения профиля. Перейти без сохранения?")) return;
+    state.formDirty = false;
+    if (state.editingProviderId && state.providers.some((provider) => provider.id === state.editingProviderId)) {
+      loadProviderIntoForm(state.editingProviderId);
+    } else {
+      createProviderDraft(false);
+    }
+  }
   const settingsVisible = view === "settings";
   $("settings-view").classList.toggle("hidden", !settingsVisible);
   $("chat-view").classList.toggle("hidden", settingsVisible);
@@ -344,7 +351,7 @@ function loadProviderIntoForm(providerId) {
   renderProviderList();
 }
 
-function createProviderDraft() {
+function createProviderDraft(focusName = true) {
   if (state.formDirty && !window.confirm("Отбросить несохранённые изменения и создать новый профиль?")) return;
   state.formDirty = false;
   state.editingProviderId = null;
@@ -368,7 +375,7 @@ function createProviderDraft() {
   $("activate-provider").disabled = false;
   setEditorStatus("Заполни endpoint и модель. Данные профиля будут сохранены локально.");
   renderProviderList();
-  $("provider-name").focus();
+  if (focusName) $("provider-name").focus();
 }
 
 function readProviderForm() {
