@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Secrets and local credentials
+secrets/*
+!secrets/.gitkeep
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+token.json
+
+# Runtime and local state
+*.log
+*.sqlite3
+*.db
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.spec
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local app data
+.config/local/
