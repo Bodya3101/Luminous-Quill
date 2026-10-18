@@ -1,0 +1,6 @@
+{
+  "base_url": "https://openrouter.ai/api/v1",
+  "model": "provider/model-name",
+  "system_prompt": "",
+  "ask_before_write": true
+}
