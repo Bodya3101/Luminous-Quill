@@ -64,3 +64,35 @@ Exact module names may evolve, but boundaries must remain explicit.
 ## Repository layout
 
 The user-facing data directories (`.config/providers`, `containers`, `projects`, `secrets`, and `skills`) remain separate from application source code. Runtime-generated credentials and state must not be tracked by Git.
+
+
+## Quick start (Windows)
+
+1. Install Python 3.11 or newer.
+2. Open a terminal in this repository.
+3. Create and activate a virtual environment:
+   - PowerShell: `.venv\Scripts\Activate.ps1`
+   - Create it first with `.\python -m venv .venv` or `.venv\Scripts\python -m venv .venv`.
+4. Install dependencies: `python -m pip install -r requirements.txt`.
+5. Launch: `python main.py`.
+
+Configure an OpenAI-compatible provider in Settings. Enter the provider base URL, model identifier, and API key. The API key is held in memory only for the current application session; set `LLQUILL_API_KEY` to provide it through the environment instead.
+
+## Current MVP scope
+
+Implemented:
+- PyWebView host with a web UI using the Prose dark visual language and JetBrains Mono assets.
+- OpenAI-compatible chat-completions adapter with function/tool calling.
+- Workspace list/read/write/delete tools scoped to `containers/One`.
+- Approval prompts for file writes and deletes.
+- Metadata-first skill discovery and on-demand instruction loading.
+- Event stream in the UI showing model and tool activity.
+- Initial unit tests for workspace path boundaries.
+
+Not implemented yet:
+- OS-enforced process sandbox and shell execution (intentionally disabled).
+- Multi-agent coordination and per-agent model/context settings.
+- Separate summarization provider and token-aware context compaction.
+- Persistent encrypted secret storage, provider profiles and Linux packaging.
+
+Important: workspace path checks protect the registered file tools. They do not isolate an arbitrary process, which is why command execution is disabled until the platform sandbox exists.
