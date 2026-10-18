@@ -37,5 +37,7 @@ build/
 .DS_Store
 Thumbs.db
 
-# Local app data
+# Local app data and local provider settings
 .config/local/
+.config/providers/*.json
+!.config/providers/*.example.json
