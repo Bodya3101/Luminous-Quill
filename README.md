@@ -69,14 +69,13 @@ The user-facing data directories (`.config/providers`, `containers`, `projects`,
 ## Quick start (Windows)
 
 1. Install Python 3.11 or newer.
-2. Open a terminal in this repository.
-3. Create and activate a virtual environment:
-   - PowerShell: `.venv\Scripts\Activate.ps1`
-   - Create it first with `.\python -m venv .venv` or `.venv\Scripts\python -m venv .venv`.
+2. In PowerShell, from the repository folder, create a virtual environment:
+   - `.\python -m venv .venv` is not needed; use `py -m venv .venv`.
+3. Activate it with `.\.venv\Scripts\Activate.ps1`.
 4. Install dependencies: `python -m pip install -r requirements.txt`.
-5. Launch: `python main.py`.
+5. Launch the app: `python main.py`.
 
-Configure an OpenAI-compatible provider in Settings. Enter the provider base URL, model identifier, and API key. The API key is held in memory only for the current application session; set `LLQUILL_API_KEY` to provide it through the environment instead.
+Configure an OpenAI-compatible provider in Settings. Enter the provider base URL, model identifier, and API key. The API key is held in memory only for the current app session; alternatively, set `LLQUILL_API_KEY` in the environment before launching.
 
 ## Current MVP scope
 
