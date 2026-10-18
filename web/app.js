@@ -12,6 +12,7 @@ const state = {
   editingProviderId: null,
   editingHasKey: false,
   clearKeyOnSave: false,
+  formDirty: false,
   bootstrapped: false
 };
 
@@ -31,6 +32,8 @@ function toast(message, type = "success") {
 }
 
 function showView(view) {
+  if (view !== "settings" && state.formDirty &&
+      !window.confirm("Есть несохранённые изменения профиля. Перейти без сохранения?")) return;
   const settingsVisible = view === "settings";
   $("settings-view").classList.toggle("hidden", !settingsVisible);
   $("chat-view").classList.toggle("hidden", settingsVisible);
@@ -292,7 +295,11 @@ function renderProviderList() {
       '<span class="provider-card-content"><span class="provider-card-top"><span class="provider-card-name">' +
       escapeHTML(provider.name) + '</span></span><span class="provider-card-model">' +
       escapeHTML(provider.model || "Модель не указана") + '</span>' + activeLabel + '</span>';
-    card.addEventListener("click", () => loadProviderIntoForm(provider.id));
+    card.addEventListener("click", () => {
+      if (state.editingProviderId === provider.id && !state.formDirty) return;
+      if (state.formDirty && !window.confirm("Отбросить несохранённые изменения текущего профиля?")) return;
+      loadProviderIntoForm(provider.id);
+    });
     list.appendChild(card);
   }
 }
@@ -300,13 +307,14 @@ function renderProviderList() {
 function setEditorStatus(message, type = "") {
   const status = $("provider-editor-status");
   status.textContent = message;
-  status.classList.remove("status-error", "status-success");
+  status.classList.remove("status-error", "status-success", "status-warning");
   if (type) status.classList.add("status-" + type);
 }
 
 function loadProviderIntoForm(providerId) {
   const provider = state.providers.find((item) => item.id === providerId);
   if (!provider) return;
+  state.formDirty = false;
   state.editingProviderId = provider.id;
   state.editingHasKey = Boolean(provider.has_api_key);
   state.clearKeyOnSave = false;
@@ -334,6 +342,8 @@ function loadProviderIntoForm(providerId) {
 }
 
 function createProviderDraft() {
+  if (state.formDirty && !window.confirm("Отбросить несохранённые изменения и создать новый профиль?")) return;
+  state.formDirty = false;
   state.editingProviderId = null;
   state.editingHasKey = false;
   state.clearKeyOnSave = false;
@@ -384,6 +394,7 @@ async function saveProvider(makeActive = false) {
     const result = await window.pywebview.api.save_provider_profile(payload);
     if (!result.ok) throw new Error(result.error || "Не удалось сохранить провайдера.");
     state.providers = result.providers || [];
+    state.formDirty = false;
     state.editingProviderId = result.provider.id;
     state.clearKeyOnSave = false;
     state.editingHasKey = Boolean(result.provider.has_api_key);
@@ -428,6 +439,7 @@ async function deleteProvider() {
     const result = await window.pywebview.api.delete_provider_profile(provider.id);
     if (!result.ok) throw new Error(result.error || "Не удалось удалить профиль.");
     state.providers = result.providers || [];
+    state.formDirty = false;
     state.activeProviderId = result.active_provider_id || "";
     updateModelChip();
     if (state.providers.some((item) => item.id === state.activeProviderId)) {
@@ -487,12 +499,23 @@ $("add-provider").addEventListener("click", createProviderDraft);
 $("save-provider").addEventListener("click", () => saveProvider(false));
 $("activate-provider").addEventListener("click", activateProvider);
 $("delete-provider").addEventListener("click", deleteProvider);
+["provider-name", "provider-url", "provider-model", "provider-key", "system-prompt"].forEach((id) => {
+  $(id).addEventListener("input", () => {
+    state.formDirty = true;
+    setEditorStatus("Есть несохранённые изменения.", "warning");
+  });
+});
+$("ask-write").addEventListener("change", () => {
+  state.formDirty = true;
+  setEditorStatus("Есть несохранённые изменения.", "warning");
+});
 $("clear-api-key").addEventListener("click", () => {
   $("provider-key").value = "";
   state.clearKeyOnSave = true;
   $("clear-api-key").classList.add("key-cleared");
+  state.formDirty = true;
   $("key-status").textContent = "Ключ будет удалён из памяти приложения после сохранения профиля.";
-  setEditorStatus("Сохрани профиль, чтобы очистить API-ключ.");
+  setEditorStatus("Есть несохранённые изменения.", "warning");
 });
 $("toggle-key-visibility").addEventListener("click", () => {
   const input = $("provider-key");

@@ -245,3 +245,5 @@ kbd{margin:0 2px;padding:2px 4px;border:1px solid #383838;border-radius:4px;colo
 @keyframes thinking-turn{to{transform:rotate(360deg)}}
 @keyframes thinking-pulse{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
 @media(prefers-reduced-motion:reduce){.thinking-symbol,.thinking-dots i,.orbit-dot{animation:none!important}}
+
+.status-warning{color:var(--amber)!important}
