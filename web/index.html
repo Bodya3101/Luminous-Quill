@@ -12,31 +12,31 @@
   <aside class="sidebar">
     <a class="brand" href="#" aria-label="LLuminous Quill — главная">
       <span class="brand-mark">Q</span>
-      <span class="brand-copy"><span class="brand-name">LLuminous Quill</span><span class="brand-sub">AGENT WORKSPACE</span></span>
+      <span class="brand-copy"><span class="brand-name">LLuminous Quill</span><span class="brand-sub" data-i18n="nav_workspace">РАБОЧАЯ СРЕДА</span></span>
     </a>
-    <div class="nav-caption">РАБОЧЕЕ МЕСТО</div>
-    <button class="nav-item active" id="nav-chat"><span class="nav-icon">◈</span><span>Диалог</span></button>
-    <button class="nav-item" id="nav-settings"><span class="nav-icon"><img src="../assets/icons/settings.svg" alt=""></span><span>Настройки</span></button>
+    <div class="nav-caption" data-i18n="nav_workspace">РАБОЧЕЕ МЕСТО</div>
+    <button class="nav-item active" id="nav-chat"><span class="nav-icon">◈</span><span data-i18n="nav_chat">Диалог</span></button>
+    <button class="nav-item" id="nav-settings"><span class="nav-icon"><img src="../assets/icons/settings.svg" alt=""></span><span data-i18n="nav_settings">Настройки</span></button>
     <div class="sidebar-spacer"></div>
     <section class="workspace-card">
-      <div class="workspace-card-head"><span class="status-dot"></span><span>Рабочая среда</span><span class="tiny-lock">⌑</span></div>
+      <div class="workspace-card-head"><span class="status-dot"></span><span data-i18n="workspace_status">Рабочая среда</span><span class="tiny-lock">⌑</span></div>
       <div class="workspace-name">containers / One</div>
       <div class="workspace-path muted small" id="workspace-path">Загрузка…</div>
-      <div class="workspace-badges"><span class="pill safe">FILESYSTEM ONLY</span><span class="pill">SHELL OFF</span></div>
+      <div class="workspace-badges"><span class="pill safe" data-i18n="filesystem_only">ФАЙЛЫ ВНУТРИ СРЕДЫ</span><span class="pill" data-i18n="shell_off">КОМАНДЫ ОТКЛЮЧЕНЫ</span></div>
     </section>
-    <div class="sidebar-foot"><span class="status-dot"></span><span>Локальный интерфейс</span><span class="version">v0.1.0</span></div>
+    <div class="sidebar-foot"><span class="status-dot"></span><span data-i18n="local_interface">Локальный интерфейс</span><span class="version">v0.1.0</span></div>
   </aside>
 
   <main class="main-area">
     <header class="topbar">
-      <div class="topbar-title"><div class="eyebrow" id="top-eyebrow">WORKSPACE / ONE</div><h1 id="view-title">Новый диалог</h1></div>
+      <div class="topbar-title"><div class="eyebrow" id="top-eyebrow" data-i18n="workspace_eyebrow">РАБОЧАЯ СРЕДА / ONE</div><h1 id="view-title">Новый диалог</h1></div>
       <div class="top-actions">
-        <button class="model-chip" id="model-chip" title="Открыть настройки провайдера">
+        <button class="model-chip" id="model-chip" title="Настроить провайдера" data-i18n-title="open_provider_settings">
           <span class="provider-orb"><span></span></span>
-          <span class="model-chip-copy"><span class="model-chip-label">АКТИВНАЯ МОДЕЛЬ</span><strong id="model-label">Модель не выбрана</strong></span>
+          <span class="model-chip-copy"><span class="model-chip-label" data-i18n="active_model_label">АКТИВНАЯ МОДЕЛЬ</span><strong id="model-label" data-i18n="model_not_selected">Модель не выбрана</strong></span>
           <span class="chip-chevron">⌄</span>
         </button>
-        <button class="icon-button" id="open-settings" aria-label="Настройки" title="Настройки">⚙</button>
+        <button class="icon-button" id="open-settings" aria-label="Настройки" title="Настройки" data-i18n-title="nav_settings" data-i18n-aria="nav_settings">⚙</button>
       </div>
     </header>
 
@@ -44,15 +44,15 @@
       <div class="chat-scroll" id="chat-scroll">
         <div class="welcome" id="welcome">
           <div class="welcome-orbit"><div class="welcome-icon">Q</div><span class="orbit-dot dot-one"></span><span class="orbit-dot dot-two"></span></div>
-          <div class="eyebrow welcome-kicker">YOUR AGENT. YOUR RULES.</div>
-          <h2>С чего начнём<span class="heading-period">?</span></h2>
-          <p class="welcome-copy">Опиши задачу обычными словами. Quill изучит рабочую папку, предложит действия и покажет всё, что требует твоего разрешения.</p>
-          <div class="quick-section-label"><span>БЫСТРЫЙ СТАРТ</span><span>ВЫБЕРИ ЗАДАЧУ <span class="mini-arrow">↘</span></span></div>
+          <div class="eyebrow welcome-kicker" data-i18n="welcome_kicker">ТВОЙ АГЕНТ. ТВОИ ПРАВИЛА.</div>
+          <h2 data-i18n="welcome_title">С чего начнём?</h2>
+          <p class="welcome-copy" data-i18n="welcome_copy">Опиши задачу обычными словами. Quill изучит рабочую папку, предложит действия и покажет всё, что требует твоего разрешения.</p>
+          <div class="quick-section-label"><span data-i18n="quick_start">БЫСТРЫЙ СТАРТ</span><span data-i18n="choose_task">ВЫБЕРИ ЗАДАЧУ <span class="mini-arrow">↘</span></span></div>
           <div class="quick-grid">
-            <button class="quick-prompt" data-prompt="Изучи структуру моей рабочей папки и кратко объясни, что в ней находится."><span class="quick-symbol">⌕</span><span class="quick-copy"><b>Изучить проект</b><small>Осмотреть файлы и структуру</small></span><span class="quick-arrow">↗</span></button>
-            <button class="quick-prompt" data-prompt="Покажи доступные навыки и объясни, для чего каждый нужен."><span class="quick-symbol">✧</span><span class="quick-copy"><b>Проверить навыки</b><small>Инструкции загружаются по запросу</small></span><span class="quick-arrow">↗</span></button>
-            <button class="quick-prompt" data-prompt="Создай файл hello.txt с коротким приветствием."><span class="quick-symbol">＋</span><span class="quick-copy"><b>Создать файл</b><small>Посмотреть, как работает доступ</small></span><span class="quick-arrow">↗</span></button>
-            <button class="quick-prompt" data-prompt="Расскажи, какие ограничения безопасности действуют в этой сборке."><span class="quick-symbol">◇</span><span class="quick-copy"><b>Проверить границы</b><small>Инструменты и безопасность</small></span><span class="quick-arrow">↗</span></button>
+            <button class="quick-prompt" data-prompt="Изучи структуру моей рабочей папки и кратко объясни, что в ней находится." data-i18n-prompt="prompt_project"><span class="quick-symbol">⌕</span><span class="quick-copy"><b data-i18n="quick_project">Изучить проект</b><small data-i18n="quick_project_desc">Осмотреть файлы и структуру</small></span><span class="quick-arrow">↗</span></button>
+            <button class="quick-prompt" data-prompt="Покажи доступные навыки и объясни, для чего каждый нужен." data-i18n-prompt="prompt_skills"><span class="quick-symbol">✧</span><span class="quick-copy"><b data-i18n="quick_skills">Проверить навыки</b><small data-i18n="quick_skills_desc">Инструкции загружаются по запросу</small></span><span class="quick-arrow">↗</span></button>
+            <button class="quick-prompt" data-prompt="Создай файл hello.txt с коротким приветствием." data-i18n-prompt="prompt_file"><span class="quick-symbol">＋</span><span class="quick-copy"><b data-i18n="quick_file">Создать файл</b><small data-i18n="quick_file_desc">Посмотреть, как работает доступ</small></span><span class="quick-arrow">↗</span></button>
+            <button class="quick-prompt" data-prompt="Расскажи, какие ограничения безопасности действуют в этой сборке." data-i18n-prompt="prompt_security"><span class="quick-symbol">◇</span><span class="quick-copy"><b data-i18n="quick_security">Проверить границы</b><small data-i18n="quick_security_desc">Инструменты и безопасность</small></span><span class="quick-arrow">↗</span></button>
           </div>
         </div>
         <div id="messages" class="messages" aria-live="polite"></div>
@@ -61,55 +61,56 @@
       </div>
       <div class="composer-wrap">
         <div class="composer-shell">
-          <div class="composer-context"><span class="context-pip"></span><span>Quill готов к работе</span><span class="composer-scope">КОНТЕЙНЕР: ONE</span></div>
+          <div class="composer-context"><span class="context-pip"></span><span data-i18n="composer_status">Quill готов к работе</span><span class="composer-scope" data-i18n="container_label">КОНТЕЙНЕР: ONE</span></div>
           <div class="composer">
-            <textarea id="message-input" rows="1" aria-label="Сообщение агенту" placeholder="Поставь задачу своему агенту…"></textarea>
-            <button id="send-button" class="send-button" aria-label="Отправить сообщение" title="Отправить">↑</button>
+            <textarea id="message-input" rows="1" aria-label="Сообщение агенту" placeholder="Поставь задачу своему агенту…" data-i18n-placeholder="composer_placeholder" data-i18n-aria="composer_aria"></textarea>
+            <button id="send-button" class="send-button" aria-label="Отправить сообщение" title="Отправить" data-i18n-title="send_message" data-i18n-aria="send_message">↑</button>
           </div>
-          <div class="composer-meta"><span><kbd>Enter</kbd> отправить <span class="meta-divider">·</span> <kbd>Shift + Enter</kbd> новая строка</span><span id="token-counter">Контекст: 0 токенов <span class="estimate-tag">ОЦЕНКА</span></span></div>
+          <div class="composer-meta"><span><kbd>Enter</kbd> <span data-i18n="enter_send">отправить</span> <span class="meta-divider">·</span> <kbd>Shift + Enter</kbd> <span data-i18n="shift_enter_newline">новая строка</span></span><span id="token-counter"><span data-i18n="context_tokens">Контекст</span>: 0 токенов <span class="estimate-tag" data-i18n="token_estimate">ОЦЕНКА</span></span></div>
         </div>
       </div>
     </section>
 
     <section class="settings-view hidden" id="settings-view">
       <div class="settings-heading">
-        <div><div class="eyebrow">CONTROL CENTER / SETTINGS</div><h2>Настройки <span class="heading-period">.</span></h2><p>Настрой модели и правила работы Quill в одном месте.</p></div>
-        <div class="settings-state"><span class="status-dot"></span><span>Настройки на этом устройстве</span></div>
+        <div><div class="eyebrow" data-i18n="settings_eyebrow">ЦЕНТР УПРАВЛЕНИЯ / НАСТРОЙКИ</div><h2 data-i18n="settings_title">Настройки</h2><p data-i18n="settings_subtitle">Настрой интерфейс, модели и правила работы Quill в одном месте.</p></div>
+        <div class="settings-state"><span class="status-dot"></span><span data-i18n="settings_on_device">Настройки на этом устройстве</span></div>
       </div>
 
+      <section class="settings-section appearance-section" id="appearance-settings-section"><div class="section-heading"><div class="section-number">01</div><div class="section-title"><h3 data-i18n="appearance_title">Внешний вид</h3><p data-i18n="appearance_desc">Настрой интерфейс под себя. Изменения применяются сразу.</p></div></div><div class="appearance-grid"><article class="appearance-card"><div class="appearance-card-head"><span class="appearance-icon">文</span><div><h4 data-i18n="language_card_title">Язык интерфейса</h4><p data-i18n="language_card_desc">Язык всех меню, сообщений и подсказок.</p></div></div><label class="appearance-field-label" for="language-select" data-i18n="language_label">Язык</label><select id="language-select" class="language-select" aria-label="Язык интерфейса" data-i18n-aria="language_label"><option value="ru" data-i18n="language_ru">Русский</option><option value="en" data-i18n="language_en">English</option></select></article><article class="appearance-card"><div class="appearance-card-head"><span class="appearance-icon">◉</span><div><h4 data-i18n="accent_card_title">Акцентный цвет</h4><p data-i18n="accent_card_desc">Цвет активных элементов, подсветки и кнопок.</p></div></div><div class="accent-swatches" role="group" aria-label="Акцентный цвет" data-i18n-aria="accent_card_title"><button type="button" class="accent-swatch" data-accent-choice="green" title="Зелёный" data-i18n-title="accent_green" aria-label="Зелёный" data-i18n-aria="accent_green"><span class="swatch-color"></span><b data-i18n="accent_green">Зелёный</b></button><button type="button" class="accent-swatch" data-accent-choice="blue" title="Синий" data-i18n-title="accent_blue" aria-label="Синий" data-i18n-aria="accent_blue"><span class="swatch-color"></span><b data-i18n="accent_blue">Синий</b></button><button type="button" class="accent-swatch" data-accent-choice="violet" title="Фиолетовый" data-i18n-title="accent_violet" aria-label="Фиолетовый" data-i18n-aria="accent_violet"><span class="swatch-color"></span><b data-i18n="accent_violet">Фиолетовый</b></button><button type="button" class="accent-swatch" data-accent-choice="amber" title="Янтарный" data-i18n-title="accent_amber" aria-label="Янтарный" data-i18n-aria="accent_amber"><span class="swatch-color"></span><b data-i18n="accent_amber">Янтарный</b></button><button type="button" class="accent-swatch" data-accent-choice="cyan" title="Бирюзовый" data-i18n-title="accent_cyan" aria-label="Бирюзовый" data-i18n-aria="accent_cyan"><span class="swatch-color"></span><b data-i18n="accent_cyan">Бирюзовый</b></button><button type="button" class="accent-swatch" data-accent-choice="rose" title="Розовый" data-i18n-title="accent_rose" aria-label="Розовый" data-i18n-aria="accent_rose"><span class="swatch-color"></span><b data-i18n="accent_rose">Розовый</b></button></div><div id="accent-preview" class="accent-preview"><span class="preview-dot"></span><span data-i18n="accent_preview">Предпросмотр акцентного цвета</span><button type="button" class="preview-button" data-i18n="save_provider">Кнопка</button></div></article></div></section>
       <section class="settings-section" id="provider-settings-section">
-        <div class="section-heading"><div class="section-number">01</div><div class="section-title"><h3>Провайдеры и модели</h3><p>Добавляй разные API, храни профили локально и переключай модель в пару кликов.</p></div><button class="primary-button add-provider-button" id="add-provider"><span>＋</span> Добавить провайдера</button></div>
+        <div class="section-heading"><div class="section-number">02</div><div class="section-title"><h3 data-i18n="provider_section_title">Провайдеры и модели</h3><p data-i18n="provider_section_desc">Добавляй разные API, храни профили локально и переключай модель в пару кликов.</p></div><button class="primary-button add-provider-button" id="add-provider"><span>＋</span> <span data-i18n="add_provider">Добавить провайдера</span></button></div>
         <div class="provider-workspace">
           <aside class="provider-rail">
-            <div class="provider-rail-head"><span>ТВОИ ПРОФИЛИ</span><span id="provider-count" class="count-badge">0</span></div>
+            <div class="provider-rail-head"><span data-i18n="provider_profiles">ТВОИ ПРОФИЛИ</span><span id="provider-count" class="count-badge">0</span></div>
             <div id="provider-list" class="provider-list"></div>
-            <div class="provider-rail-foot"><span class="rail-info-icon">i</span><span>Один профиль = один endpoint и одна модель. API-ключи не сохраняются на диск.</span></div>
+            <div class="provider-rail-foot"><span class="rail-info-icon">i</span><span data-i18n="provider_rail_note">Один профиль — один endpoint и одна модель. API-ключи не сохраняются на диск.</span></div>
           </aside>
           <div class="provider-editor">
-            <div class="editor-topline"><div><div class="eyebrow" id="provider-form-status">PROVIDER PROFILE</div><h3 id="provider-form-title">Новый провайдер</h3></div><span id="provider-active-badge" class="active-badge hidden"><span></span> АКТИВЕН</span></div>
+            <div class="editor-topline"><div><div class="eyebrow" id="provider-form-status" data-i18n="provider_profile">ПРОФИЛЬ ПРОВАЙДЕРА</div><h3 id="provider-form-title" data-i18n="new_provider">Новый провайдер</h3></div><span id="provider-active-badge" class="active-badge hidden"><span></span> <span data-i18n="active_badge">АКТИВЕН</span></span></div>
             <div class="provider-form-grid">
-              <label class="field-span-2">Название профиля<div class="input-wrap"><span class="input-glyph">✳</span><input id="provider-name" type="text" maxlength="80" placeholder="Например, OpenRouter"></div></label>
-              <label class="field-span-2">Base URL <span class="label-hint">OpenAI-compatible API</span><div class="input-wrap"><span class="input-glyph">↗</span><input id="provider-url" type="url" placeholder="https://openrouter.ai/api/v1" autocomplete="url"></div></label>
-              <label class="field-span-2">Идентификатор модели<div class="input-wrap"><span class="input-glyph">◈</span><input id="provider-model" type="text" placeholder="provider/model-name" autocomplete="off"></div></label>
-              <label class="field-span-2">API-ключ<div class="secret-input-row"><div class="input-wrap secret-wrap"><span class="input-glyph">⌑</span><input id="provider-key" type="password" placeholder="Вставь ключ для этой сессии" autocomplete="new-password"><button type="button" id="toggle-key-visibility" class="inline-icon-button" title="Показать или скрыть ключ" aria-label="Показать или скрыть ключ">◉</button></div><button type="button" id="clear-api-key" class="text-button">Очистить</button></div><div id="key-status" class="field-note">Ключ нужен для запросов и останется только в памяти приложения.</div></label>
-              <label class="field-span-2 prompt-label">Системный промпт <span class="label-hint">Индивидуальный для этой модели</span><textarea id="system-prompt" rows="4" placeholder="Роль, стиль ответа, специализированные инструкции…"></textarea><span class="field-note">Гайд по управлению инструментами добавляется отдельно автоматически.</span></label>
-              <label class="profile-toggle field-span-2"><span><b>Подтверждать изменения файлов</b><small>Quill будет спрашивать разрешение перед записью и удалением.</small></span><input id="ask-write" type="checkbox" checked></label>
+              <label class="field-span-2" data-i18n="provider_name_label">Название профиля<div class="input-wrap"><span class="input-glyph">✳</span><input id="provider-name" type="text" maxlength="80" placeholder="Например, OpenRouter" data-i18n-placeholder="provider_name_placeholder"></div></label>
+              <label class="field-span-2" data-i18n="provider_url_label">Base URL <span class="label-hint" data-i18n="provider_url_hint">OpenAI-совместимый API</span><div class="input-wrap"><span class="input-glyph">↗</span><input id="provider-url" type="url" placeholder="https://openrouter.ai/api/v1" autocomplete="url"></div></label>
+              <label class="field-span-2" data-i18n="provider_model_label">Идентификатор модели<div class="input-wrap"><span class="input-glyph">◈</span><input id="provider-model" type="text" placeholder="provider/model-name" data-i18n-placeholder="provider_model_placeholder" autocomplete="off"></div></label>
+              <label class="field-span-2" data-i18n="provider_key_label">API-ключ<div class="secret-input-row"><div class="input-wrap secret-wrap"><span class="input-glyph">⌑</span><input id="provider-key" type="password" placeholder="Вставь ключ для этой сессии" data-i18n-placeholder="provider_key_placeholder" autocomplete="new-password"><button type="button" id="toggle-key-visibility" class="inline-icon-button" title="Показать или скрыть ключ" aria-label="Показать или скрыть ключ" data-i18n-title="show_key" data-i18n-aria="show_key">◉</button></div><button type="button" id="clear-api-key" class="text-button" data-i18n="clear_key">Очистить</button></div><div id="key-status" class="field-note">Ключ нужен для запросов и останется только в памяти приложения.</div></label>
+              <label class="field-span-2 prompt-label" data-i18n="system_prompt_label">Системный промпт <span class="label-hint" data-i18n="system_prompt_hint">Индивидуальный для этой модели</span><textarea id="system-prompt" rows="4" placeholder="Роль, стиль ответа, специализированные инструкции…" data-i18n-placeholder="system_prompt_placeholder"></textarea><span class="field-note" data-i18n="tool_guide_note">Гайд по управлению инструментами добавляется отдельно автоматически.</span></label>
+              <label class="profile-toggle field-span-2"><span><b data-i18n="confirm_file_changes">Подтверждать изменения файлов</b><small data-i18n="confirm_file_changes_desc">Quill будет спрашивать разрешение перед записью и удалением.</small></span><input id="ask-write" type="checkbox" checked></label>
             </div>
-            <div class="provider-editor-bottom"><div class="provider-editor-status" id="provider-editor-status">Изменения сохраняются только после нажатия кнопки.</div><div class="provider-actions"><button class="danger-ghost hidden" id="delete-provider">Удалить</button><button class="secondary-button" id="save-provider">Сохранить</button><button class="primary-button" id="activate-provider">Сохранить и использовать <span>↗</span></button></div></div>
+            <div class="provider-editor-bottom"><div class="provider-editor-status" id="provider-editor-status">Изменения сохраняются только после нажатия кнопки.</div><div class="provider-actions"><button class="danger-ghost hidden" id="delete-provider" data-i18n="delete_provider">Удалить</button><button class="secondary-button" id="save-provider" data-i18n="save_provider">Сохранить</button><button class="primary-button" id="activate-provider"><span data-i18n="save_and_activate">Сохранить и использовать</span> <span>↗</span></button></div></div>
           </div>
         </div>
       </section>
 
       <section class="settings-section" id="security-settings-section">
-        <div class="section-heading"><div class="section-number">02</div><div class="section-title"><h3>Безопасность среды</h3><p>Что агент может делать в этой версии приложения.</p></div></div>
+        <div class="section-heading"><div class="section-number">03</div><div class="section-title"><h3 data-i18n="security_section_title">Безопасность среды</h3><p data-i18n="security_section_desc">Что агент может делать в этой версии приложения.</p></div></div>
         <div class="security-grid">
-          <article class="security-setting"><span class="security-icon safe-icon">⌂</span><div class="security-copy"><h4>Файловые операции</h4><p>Доступ только внутри <code>containers/One</code>.</p></div><span class="pill safe">ОГРАНИЧЕНЫ</span></article>
-          <article class="security-setting"><span class="security-icon danger-icon">⇥</span><div class="security-copy"><h4>Внешние папки и другие контейнеры</h4><p>Доступ не предоставляется автоматически.</p></div><span class="pill danger">ЗАКРЫТЫ</span></article>
-          <article class="security-setting"><span class="security-icon danger-icon">⌘</span><div class="security-copy"><h4>Запуск команд</h4><p>Отключён до появления системной изоляции процессов.</p></div><span class="pill danger">ОТКЛЮЧЁН</span></article>
-          <article class="security-setting"><span class="security-icon safe-icon">✧</span><div class="security-copy"><h4>Код навыков</h4><p>Навыки читаются по запросу, Python не запускается автоматически.</p></div><span class="pill safe">ПОД КОНТРОЛЕМ</span></article>
+          <article class="security-setting"><span class="security-icon safe-icon">⌂</span><div class="security-copy"><h4 data-i18n="security_files_title">Файловые операции</h4><p data-i18n="security_files_desc">Доступ только внутри <code>containers/One</code>.</p></div><span class="pill safe" data-i18n="security_limited">ОГРАНИЧЕНЫ</span></article>
+          <article class="security-setting"><span class="security-icon danger-icon">⇥</span><div class="security-copy"><h4 data-i18n="security_external_title">Внешние папки и другие контейнеры</h4><p data-i18n="security_external_desc">Доступ не предоставляется автоматически.</p></div><span class="pill danger" data-i18n="security_closed">ЗАКРЫТЫ</span></article>
+          <article class="security-setting"><span class="security-icon danger-icon">⌘</span><div class="security-copy"><h4 data-i18n="security_commands_title">Запуск команд</h4><p data-i18n="security_commands_desc">Отключён до появления системной изоляции процессов.</p></div><span class="pill danger" data-i18n="security_disabled">ОТКЛЮЧЁН</span></article>
+          <article class="security-setting"><span class="security-icon safe-icon">✧</span><div class="security-copy"><h4 data-i18n="security_skills_title">Код навыков</h4><p data-i18n="security_skills_desc">Навыки читаются по запросу, Python не запускается автоматически.</p></div><span class="pill safe" data-i18n="security_controlled">ПОД КОНТРОЛЕМ</span></article>
         </div>
       </section>
-      <footer class="settings-footer"><span>LLuminous Quill <span class="footer-dot">·</span> локальные настройки</span><span>Изменения провайдера сохраняются отдельно</span></footer>
+      <footer class="settings-footer"><span>LLuminous Quill <span class="footer-dot">·</span> <span data-i18n="footer_local">локальные настройки</span></span><span data-i18n="footer_provider_note">Настройки провайдеров сохраняются отдельно</span></footer>
     </section>
   </main>
 </div>

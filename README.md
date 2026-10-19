@@ -94,3 +94,7 @@ Not implemented yet:
 - Persistent encrypted secret storage, provider profiles and Linux packaging.
 
 Important: workspace path checks protect the registered file tools. They do not isolate an arbitrary process, which is why command execution is disabled until the platform sandbox exists.
+
+## Interface preferences
+
+The interface supports Russian and English, with six accent presets: green, blue, violet, amber, cyan and rose. The selected language and accent are applied immediately and saved in `.config/ui_settings.json`. Both locale dictionaries live in `web/locales/` and are loaded through the application bridge, so local file access does not depend on browser `fetch()` behavior for `file://` URLs.

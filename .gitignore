@@ -39,5 +39,6 @@ Thumbs.db
 
 # Local app data and local provider settings
 .config/local/
+.config/ui_settings.json
 .config/providers/*.json
 !.config/providers/*.example.json

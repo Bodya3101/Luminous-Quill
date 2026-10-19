@@ -31,12 +31,15 @@ class AppBridge:
         self.skills = SkillRegistry(data_dir / "skills")
         self.config_path = data_dir / ".config" / "providers" / "providers.json"
         self.legacy_config_path = data_dir / ".config" / "providers" / "default.json"
+        self.ui_settings_path = data_dir / ".config" / "ui_settings.json"
+        self.locale_dir = Path(__file__).resolve().parent.parent / "web" / "locales"
         self.config_path.parent.mkdir(parents=True, exist_ok=True)
         self.lock = threading.RLock()
         self.runs: dict[str, RunState] = {}
         self.api_keys: dict[str, str] = {}
         self.providers: list[dict[str, Any]] = []
         self.active_provider_id = ""
+        self.ui_settings = self._load_ui_settings()
         self._load_provider_store()
         env_key = os.environ.get("LLQUILL_API_KEY", "")
         if env_key and self.active_provider_id:
@@ -109,6 +112,63 @@ class AppBridge:
         )
         return view
 
+    def _load_ui_settings(self) -> dict[str, str]:
+        allowed_languages = {"ru", "en"}
+        allowed_accents = {"green", "blue", "violet", "amber", "cyan", "rose"}
+        defaults = {"language": "ru", "accent_color": "green"}
+        try:
+            data = json.loads(self.ui_settings_path.read_text(encoding="utf-8"))
+            if isinstance(data, dict):
+                if data.get("language") in allowed_languages:
+                    defaults["language"] = str(data["language"])
+                if data.get("accent_color") in allowed_accents:
+                    defaults["accent_color"] = str(data["accent_color"])
+        except (OSError, json.JSONDecodeError):
+            pass
+        return defaults
+
+    def get_ui_settings(self) -> dict[str, str]:
+        with self.lock:
+            return dict(self.ui_settings)
+
+    def update_ui_settings(self, updates: dict[str, Any]) -> dict[str, Any]:
+        if not isinstance(updates, dict):
+            return {"ok": False, "error": "Settings must be an object."}
+        allowed_languages = {"ru", "en"}
+        allowed_accents = {"green", "blue", "violet", "amber", "cyan", "rose"}
+        with self.lock:
+            candidate = dict(self.ui_settings)
+            if "language" in updates:
+                language = updates["language"]
+                if not isinstance(language, str) or language not in allowed_languages:
+                    return {"ok": False, "error": "Unsupported interface language."}
+                candidate["language"] = language
+            if "accent_color" in updates:
+                accent = updates["accent_color"]
+                if not isinstance(accent, str) or accent not in allowed_accents:
+                    return {"ok": False, "error": "Unsupported accent color."}
+                candidate["accent_color"] = accent
+            temporary = self.ui_settings_path.with_suffix(".tmp")
+            try:
+                temporary.write_text(json.dumps(candidate, ensure_ascii=False, indent=2), encoding="utf-8")
+                temporary.replace(self.ui_settings_path)
+            except OSError as exc:
+                return {"ok": False, "error": "Could not save interface preferences: " + str(exc)}
+            self.ui_settings = candidate
+            return {"ok": True, "settings": dict(candidate)}
+
+    def get_translations(self, language: str = "ru") -> dict[str, Any]:
+        if language not in {"ru", "en"}:
+            language = "ru"
+        path = self.locale_dir / (language + ".json")
+        try:
+            translations = json.loads(path.read_text(encoding="utf-8"))
+            if isinstance(translations, dict):
+                return translations
+        except (OSError, json.JSONDecodeError):
+            pass
+        return {"_error": "Localization file could not be loaded."}
+
     def get_bootstrap_data(self) -> dict[str, Any]:
         with self.lock:
             providers = [self._provider_view(p) for p in self.providers]
@@ -119,6 +179,8 @@ class AppBridge:
             "providers": providers,
             "active_provider_id": self.active_provider_id,
             "provider": active_view,
+            "ui_settings": self.get_ui_settings(),
+            "available_languages": ["ru", "en"],
             "workspace": {"name": "One", "path": str(self.workspace.root)},
             "skills": self.skills.list_skills(),
             "capabilities": {"filesystem_tools": True, "command_execution": False},
